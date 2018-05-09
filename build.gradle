@@ -32,6 +32,7 @@ dependencies {
     compile("org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}")
     compile("org.apache.tomcat.embed:tomcat-embed-el:${tomcatVersion}")
     compile("org.apache.tomcat.embed:tomcat-embed-websocket:${tomcatVersion}")
+    compileOnly('org.projectlombok:lombok:1.18.2')
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testCompile("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     testCompile('org.springframework.boot:spring-boot-starter-test') {
