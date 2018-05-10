@@ -2,3 +2,12 @@ server:
 
   #  端口号
   port: 8300
+
+spring:
+
+  # 数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:6033/spring_boot_mybatis_demo?useSSL=false
+    username: root
+    password: 123456
