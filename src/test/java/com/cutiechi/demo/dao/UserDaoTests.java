@@ -6,6 +6,7 @@ import com.cutiechi.demo.model.entity.User;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户数据访问接口测试类
