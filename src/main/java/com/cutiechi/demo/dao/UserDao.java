@@ -3,6 +3,7 @@ package com.cutiechi.demo.dao;
 import com.cutiechi.demo.model.entity.User;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,7 @@ public interface UserDao {
      * @param userName 用户名称
      * @return 用户
      */
+    @Select("select user_id, user_name, user_password from user where user_name = #{userName}")
     User getByName (final String userName);
 
     /**
