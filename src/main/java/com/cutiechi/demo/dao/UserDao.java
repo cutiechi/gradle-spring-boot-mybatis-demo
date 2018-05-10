@@ -2,6 +2,7 @@ package com.cutiechi.demo.dao;
 
 import com.cutiechi.demo.model.entity.User;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -43,4 +44,13 @@ public interface UserDao {
      */
     @Select("select user_id, user_name, user_password from user")
     List<User> listAll ();
+
+
+    /**
+     * 根据用户 ID 删除用户
+     *
+     * @param userId 用户 ID
+     */
+    @Delete("delete from user where user_id = #{userId}")
+    void deleteById (final Integer userId);
 }
