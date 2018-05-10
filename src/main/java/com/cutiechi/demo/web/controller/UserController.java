@@ -8,7 +8,9 @@ import com.cutiechi.demo.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,5 +70,24 @@ public final class UserController {
     public JsonResponse listAll () throws InternalServerErrorException {
         ServiceResult result = userService.listAll();
         return new JsonResponse(20000, result.getMessage(), result.getResult());
+    }
+
+    /**
+     * 根据用户 ID 删除用户, API 为 /users/{userId}
+     *
+     * @param userId 用户 ID
+     * @return JSON 响应
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    @DeleteMapping("/{userId}")
+    public JsonResponse deleteById (@PathVariable Integer userId) throws InternalServerErrorException {
+
+        // 获取根据用户 ID 删除用户业务逻辑结果对象
+        ServiceResult result = userService.deleteById(userId);
+
+        // 根据业务逻辑是否成功返回 JSON 响应
+        return result.getStatus()
+            ? new JsonResponse(20000, result.getMessage(), result.getResult())
+            : new JsonResponse(40000, result.getMessage());
     }
 }
