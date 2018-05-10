@@ -8,6 +8,7 @@ import com.cutiechi.demo.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,5 +56,17 @@ public final class UserController {
         return result.getStatus()
             ? new JsonResponse(20000, result.getMessage(), result.getResult())
             : new JsonResponse(40000, result.getMessage());
+    }
+
+    /**
+     * 获取全部用户列表, API 为 GET 请求 /users
+     *
+     * @return JSON 响应
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    @GetMapping("")
+    public JsonResponse listAll () throws InternalServerErrorException {
+        ServiceResult result = userService.listAll();
+        return new JsonResponse(20000, result.getMessage(), result.getResult());
     }
 }
