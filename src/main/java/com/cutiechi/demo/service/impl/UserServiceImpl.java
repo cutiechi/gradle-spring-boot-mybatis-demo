@@ -88,6 +88,37 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 根据用户 ID 获取用户
+     *
+     * @param userId 用户 ID
+     * @return 附带用户的业务逻辑结果
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    @Override
+    public ServiceResult getById (Integer userId) throws InternalServerErrorException {
+        try {
+
+            // 根据用户 ID 获取用户
+            User user = userDao.getById(userId);
+
+            // 判断用户是否为 null
+            if (null != user) {
+
+                // 用户不为 null 返回附带用户的业务逻辑结果
+                return ServiceResult.success("获取用户成功！", user);
+            } else {
+
+                // 用户为 null 返回附带错误信息的业务逻辑结果
+                return ServiceResult.fail("用户不存在，获取用户失败！");
+            }
+        } catch (Exception e) {
+
+            // 获取失败抛出内部服务器错误异常
+            throw new InternalServerErrorException("服务器错误，获取用户失败！");
+        }
+    }
+
+    /**
      * 根据用户 ID 删除用户
      *
      * @param userId 用户 ID

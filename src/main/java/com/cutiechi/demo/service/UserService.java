@@ -29,6 +29,15 @@ public interface UserService {
     ServiceResult listAll () throws InternalServerErrorException;
 
     /**
+     * 根据用户 ID 获取用户
+     *
+     * @param userId 用户 ID
+     * @return 附带用户的业务逻辑结果
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    ServiceResult getById (final Integer userId) throws InternalServerErrorException;
+
+    /**
      * 根据用户 ID 删除用户
      *
      * @param userId 用户 ID
