@@ -73,6 +73,25 @@ public final class UserController {
     }
 
     /**
+     * 根据用户 ID 获取用户, API 为 GET 请求 /users/{usersId}
+     *
+     * @param userId 用户 ID
+     * @return JSON 响应
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    @GetMapping("/{userId}")
+    public JsonResponse getById (@PathVariable Integer userId) throws InternalServerErrorException {
+
+        // 获取根据用户 ID 获取用户的业务逻辑结果对象
+        ServiceResult result = userService.getById(userId);
+
+        // 根据业务逻辑是否成功返回 JSON 响应
+        return result.getStatus()
+            ? new JsonResponse(20000, result.getMessage(), result.getResult())
+            : new JsonResponse(40000, result.getMessage());
+    }
+
+    /**
      * 根据用户 ID 删除用户, API 为 /users/{userId}
      *
      * @param userId 用户 ID
