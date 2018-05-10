@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Select;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 用户数据访问接口
  *
@@ -33,4 +35,12 @@ public interface UserDao {
     @Insert("insert into user values (#{userId}, #{userName}, #{userPassword})")
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     void insert (final User user);
+
+    /**
+     * 获取全部用户列表
+     *
+     * @return 全部用户列表
+     */
+    @Select("select user_id, user_name, user_password from user")
+    List<User> listAll ();
 }
