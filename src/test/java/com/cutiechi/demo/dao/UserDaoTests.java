@@ -19,6 +19,15 @@ class UserDaoTests extends ApplicationTests {
     private UserDao userDao;
 
     /**
+     * 测试根据用户名称取用户方法
+     */
+    @Test
+    void testGetByName () {
+        final String userName = "super";
+        System.out.println(userDao.getByName(userName));
+    }
+
+    /**
      * 测试添加用户方法
      */
     @Test
