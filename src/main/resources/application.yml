@@ -3,6 +3,10 @@ server:
   #  端口号
   port: 8300
 
+  # 路径前缀
+  servlet:
+    context-path: /crud-demo/v1
+
 spring:
 
   # 数据源
