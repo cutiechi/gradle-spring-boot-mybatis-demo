@@ -45,6 +45,15 @@ public interface UserDao {
     @Select("select user_id, user_name, user_password from user")
     List<User> listAll ();
 
+    /**
+     * 根据用户 ID 获取用户
+     *
+     * @param userId 用户 ID
+     * @return 用户
+     */
+    @Select("select user_id, user_name, user_password from user where user_id = #{userId}")
+    User getById (final Integer userId);
+
 
     /**
      * 根据用户 ID 删除用户
