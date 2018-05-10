@@ -32,7 +32,10 @@ class UserDaoTests extends ApplicationTests {
      * 测试添加用户方法
      */
     @Test
+    @Transactional
     void testInsert () {
-        userDao.insert(new User(null, "super", "123456"));
+        User user = new User(null, "super", "123456");
+        userDao.insert(user);
+        System.out.println(user);
     }
 }
