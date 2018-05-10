@@ -27,4 +27,13 @@ public interface UserService {
      * @throws InternalServerErrorException 内部服务器错误异常
      */
     ServiceResult listAll () throws InternalServerErrorException;
+
+    /**
+     * 根据用户 ID 删除用户
+     *
+     * @param userId 用户 ID
+     * @return 附带删除用户的业务逻辑结果
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    ServiceResult deleteById (final Integer userId) throws InternalServerErrorException;
 }

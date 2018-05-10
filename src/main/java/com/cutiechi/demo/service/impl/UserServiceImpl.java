@@ -86,4 +86,38 @@ public class UserServiceImpl implements UserService {
             throw new InternalServerErrorException("服务器错误，获取全部用户列表失败！");
         }
     }
+
+    /**
+     * 根据用户 ID 删除用户
+     *
+     * @param userId 用户 ID
+     * @return 附带删除用户的业务逻辑结果
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    @Override
+    public ServiceResult deleteById (Integer userId) throws InternalServerErrorException {
+        try {
+
+            // 删除前根据 ID 获取要删除的用户
+            User user = userDao.getById(userId);
+
+            // 判断用户是否存在
+            if (null != user) {
+
+                // 获取到的用户不为空根据用户 ID 删除用户
+                userDao.deleteById(userId);
+
+                // 删除成功返回附带 user 对象的业务逻辑结果
+                return ServiceResult.success("删除用户成功！", user);
+            } else {
+
+                // 用户不存在返回附带错误信息的业务逻辑结果
+                return ServiceResult.fail("用户不存在，删除用户失败！");
+            }
+        } catch (Exception exception) {
+
+            // 根据 ID 获取用户或删除失败抛出内部服务器错误异常
+            throw new InternalServerErrorException("服务器错误，删除用户失败！");
+        }
+    }
 }
