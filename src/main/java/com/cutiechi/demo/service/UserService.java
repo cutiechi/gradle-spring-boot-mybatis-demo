@@ -19,4 +19,12 @@ public interface UserService {
      * @throws InternalServerErrorException 内部服务器错误异常
      */
     ServiceResult insert (final User user) throws InternalServerErrorException;
+
+    /**
+     * 获取全部用户列表
+     *
+     * @return 全部用户列表
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    ServiceResult listAll () throws InternalServerErrorException;
 }

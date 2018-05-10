@@ -9,6 +9,8 @@ import com.cutiechi.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 用户业务逻辑实现类
  *
@@ -60,6 +62,28 @@ public class UserServiceImpl implements UserService {
                 // 添加失败抛出内部服务器错误异常
                 throw new InternalServerErrorException("服务器错误，添加用户失败！");
             }
+        }
+    }
+
+    /**
+     * 获取全部用户列表
+     *
+     * @return 全部用户列表
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    @Override
+    public ServiceResult listAll () throws InternalServerErrorException {
+        try {
+
+            // 获取全部用户列表
+            List<User> users = userDao.listAll();
+
+            // 获取成功返回附带用户列表的业务逻辑列表
+            return ServiceResult.success("获取全部用户列表成功！", users);
+        } catch (Exception exception) {
+
+            // 获取失败抛出内部服务器错误异常
+            throw new InternalServerErrorException("服务器错误，获取全部用户列表失败！");
         }
     }
 }
