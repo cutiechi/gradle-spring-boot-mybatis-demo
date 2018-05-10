@@ -15,6 +15,14 @@ import org.springframework.stereotype.Repository;
 public interface UserDao {
 
     /**
+     * 通过用户名称获取用户
+     *
+     * @param userName 用户名称
+     * @return 用户
+     */
+    User getByName (final String userName);
+
+    /**
      * 添加用户
      *
      * @param user 用户
