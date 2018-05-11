@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -103,6 +104,29 @@ public final class UserController {
 
         // 获取根据用户 ID 删除用户业务逻辑结果对象
         ServiceResult result = userService.deleteById(userId);
+
+        // 根据业务逻辑是否成功返回 JSON 响应
+        return result.getStatus()
+            ? new JsonResponse(20000, result.getMessage(), result.getResult())
+            : new JsonResponse(40000, result.getMessage());
+    }
+
+    /**
+     * 修改用户, API 为 /users/{userId}
+     *
+     * @param userId 用户 ID
+     * @param user 用户
+     * @return JSON 响应
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    @PutMapping("/{userId}")
+    public JsonResponse update (@PathVariable Integer userId, @RequestBody User user) throws InternalServerErrorException {
+
+        // 将用户 ID 给用户对象
+        user.setUserId(userId);
+
+        // 获取修改用户业务逻辑的结果
+        ServiceResult result = userService.update(user);
 
         // 根据业务逻辑是否成功返回 JSON 响应
         return result.getStatus()
