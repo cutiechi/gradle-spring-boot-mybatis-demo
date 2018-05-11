@@ -151,4 +151,51 @@ public class UserServiceImpl implements UserService {
             throw new InternalServerErrorException("服务器错误，删除用户失败！");
         }
     }
+
+    /**
+     * 修改用户
+     *
+     * @param user 用户
+     * @return 附带修改后用户的业务逻辑结果
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    @Override
+    public ServiceResult update (final User user) throws InternalServerErrorException {
+        try {
+
+            // 删除前先根据用户 ID 获取用户修改之前的信息
+            final User oldUser = userDao.getById(user.getUserId());
+
+            // 判断用户是否存在
+            if (null != oldUser) {
+
+                // oldUser 不为 null, 说明用户存在, 获取新旧用户名
+                final String oldUserName = oldUser.getUserName();
+                final String newUserName = user.getUserName();
+
+                // 判断新旧用户名是否相等
+                if (!oldUserName.equals(newUserName)) {
+
+                    // 不相等判断新用户名是否已经使用
+                    if (null != userDao.getByName(newUserName)) {
+
+                        // 已经使用返回附带错误信息的业务逻辑结果
+                        return ServiceResult.fail("用户名已存在，修改用户失败！");
+                    }
+                }
+
+                // 修改用户
+                userDao.update(user);
+
+                // 返回附带修改后用户的业务逻辑结果
+                return ServiceResult.success("修改用户成功！", user);
+            } else {
+
+                // oldUser 为 null, 说明用户不存在, 返回附带错误信息的业务逻辑结构钢
+                return ServiceResult.fail("用户不存在，修改用户失败！");
+            }
+        } catch (Exception exception) {
+            throw new InternalServerErrorException("服务器错误，修改用户失败！");
+        }
+    }
 }

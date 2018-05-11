@@ -45,4 +45,13 @@ public interface UserService {
      * @throws InternalServerErrorException 内部服务器错误异常
      */
     ServiceResult deleteById (final Integer userId) throws InternalServerErrorException;
+
+    /**
+     * 修改用户
+     *
+     * @param user 用户
+     * @return 附带修改后用户的业务逻辑结果
+     * @throws InternalServerErrorException 内部服务器错误异常
+     */
+    ServiceResult update (final User user) throws InternalServerErrorException;
 }
